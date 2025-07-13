@@ -12,3 +12,12 @@ jobs:
         uses: ./
         with:
           input-filename: "test.drawio"
+      - name: Print output filename
+        run: echo "Output file is ${{ steps.export.outputs.output-filename }}"
+
+      - name: Upload output file
+        uses: actions/upload-artifact@v4
+        with:
+          name: exported-file
+          path: ${{ steps.export.outputs.output-filename }}
+          overwrite: true
