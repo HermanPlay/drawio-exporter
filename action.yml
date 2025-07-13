@@ -1,4 +1,3 @@
-# action.yml
 name: "Drawio exporter"
 description: "Exports dot drawio file to specified format"
 inputs:
@@ -13,10 +12,17 @@ outputs:
   output-filename:
     description: "Output filename path"
 runs:
-  using: "docker"
-  image: "docker://rlespinasse/drawio-desktop-headless"
-  args:
-    - "-f"
-    - ${{ inputs.format }}
-    - "-x"
-    - ${{ inputs.input-filename }}
+  using: "composite"
+  steps:
+    - name: Export drawio file
+      id: export
+      shell: bash
+      run: |
+        output=$(docker run --rm -v $PWD:/data rlespinasse/drawio-desktop-headless:v1.46.0 -f "${{ inputs.format }}" -x "${{ inputs.input-filename }}" 2>&1)
+        echo "Docker output: $output"
+
+        output_file=$(echo "$output" | grep -o '-> [^[:space:]]*' | sed 's/-> //' | tail -1)
+
+        # Set the output
+        echo "output-filename=$output_file" >> $GITHUB_OUTPUT
+        echo "Generated file: $output_file"
