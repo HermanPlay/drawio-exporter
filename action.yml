@@ -11,6 +11,7 @@ inputs:
 outputs:
   output-filename:
     description: "Output filename path"
+    value: ${{ steps.export.outputs.output-filename }}
 runs:
   using: "composite"
   steps:
