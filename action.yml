@@ -16,6 +16,7 @@ runs:
   using: "docker"
   image: "docker://rlespinasse/drawio-desktop-headless"
   args:
-    - "-f ${{ inputs.format }}"
+    - "-f"
+    - ${{ inputs.format }}
     - "-x"
     - ${{ inputs.input-filename }}
