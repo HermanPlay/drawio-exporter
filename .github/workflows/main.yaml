@@ -1,0 +1,12 @@
+on: [push]
+
+jobs:
+  drawio_exporter_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Export to svg
+        id: export
+        uses: actions/drawio-exporter@v0.0.1
+        with:
+          input-filename: 'test.drawio'
