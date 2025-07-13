@@ -3,7 +3,7 @@ on: [push]
 jobs:
   drawio_exporter_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: A job to test if works
     steps:
       - name: Checkout
         uses: actions/checkout@v4
