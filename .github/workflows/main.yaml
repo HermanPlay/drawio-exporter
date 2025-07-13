@@ -7,6 +7,6 @@ jobs:
     steps:
       - name: Export to svg
         id: export
-        uses: actions/drawio-exporter@v0.0.1
+        uses: actions/drawio-exporter@v1
         with:
           input-filename: 'test.drawio'
