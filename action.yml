@@ -21,7 +21,7 @@ runs:
         output=$(docker run --rm -v $PWD:/data rlespinasse/drawio-desktop-headless:v1.46.0 -f "${{ inputs.format }}" -x "/data/${{ inputs.input-filename }}" 2>&1)
         echo "Docker output: $output"
 
-        output_file=$(echo "$output" | grep -- '->' | awk -F'-> ' '{print $2}' | tail -1)
+        output_file=$(echo "$output" | grep -- '-> /data' | awk -F'-> /data/' '{print $2}' | tail -1)
 
         # Set the output
         echo "output-filename=$output_file" >> $GITHUB_OUTPUT
