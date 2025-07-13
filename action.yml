@@ -1,22 +1,21 @@
 # action.yml
-name: 'Drawio exporter'
-description: 'Exports dot drawio file to specified format'
+name: "Drawio exporter"
+description: "Exports dot drawio file to specified format"
 inputs:
   input-filename:
-	description: 'Full path to input file'
-	required: true	
+    description: "Full path to input file"
+    required: true
   format:
-	description: 'Which format to export file to. Possible export formats are pdf, png, jpg, svg, and xml) (default: "svg")'
-	required: false
-	default: 'svg'
+    description: 'Which format to export file to. Possible export formats are pdf, png, jpg, svg, and xml) (default: "svg")'
+    required: false
+    default: "svg"
 outputs:
-  output-filename: 
-    description: 'Output filename path'
+  output-filename:
+    description: "Output filename path"
 runs:
-  using: 'docker'
-  image: 'docker://rlespinasse/drawio-desktop-headless' 
+  using: "docker"
+  image: "docker://rlespinasse/drawio-desktop-headless"
   args:
-	- '-f' ${{ inputs.format }} 
-    - '-x'
+    - "-f ${{ inputs.format }}"
+    - "-x"
     - ${{ inputs.input-filename }}
-
